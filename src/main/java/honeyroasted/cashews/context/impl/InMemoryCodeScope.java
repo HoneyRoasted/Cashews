@@ -2,9 +2,8 @@ package honeyroasted.cashews.context.impl;
 
 import honeyroasted.cashews.context.CodeLabel;
 import honeyroasted.cashews.context.CodeScope;
-import honeyroasted.jype.system.TypeConstants;
-import honeyroasted.jype.system.TypeSystem;
-import honeyroasted.jype.type.Type;
+import honeyroasted.jype.system.JTypeConstants;
+import honeyroasted.jype.type.JType;
 
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
@@ -78,7 +77,7 @@ public class InMemoryCodeScope implements CodeScope {
     }
 
     @Override
-    public Optional<Var> defineVar(String name, Type type) {
+    public Optional<Var> defineVar(String name, JType type) {
         if (var(name).isPresent() || type.equals(type.typeSystem().constants().voidType())) {
             return Optional.empty();
         } else {
@@ -89,10 +88,10 @@ public class InMemoryCodeScope implements CodeScope {
     }
 
     @Override
-    public int nextIndex(Type type) {
+    public int nextIndex(JType type) {
         if (this.parent != null) return this.parent.nextIndex(type);
 
-        TypeConstants constants = type.typeSystem().constants();
+        JTypeConstants constants = type.typeSystem().constants();
         int result = this.counter;
 
         if (type.equals(constants.longType()) || type.equals(constants.doubleType())) {

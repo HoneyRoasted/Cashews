@@ -1,6 +1,6 @@
 package honeyroasted.cashews.context;
 
-import honeyroasted.jype.type.Type;
+import honeyroasted.jype.type.JType;
 
 import java.util.Optional;
 
@@ -22,14 +22,14 @@ public interface CodeScope {
 
     Optional<Var> var(String name);
 
-    Optional<Var> defineVar(String name, Type type);
+    Optional<Var> defineVar(String name, JType type);
 
-    int nextIndex(Type type);
+    int nextIndex(JType type);
 
     record Control(String name, CodeLabel label) {
         public enum Kind { BREAK, CONTINUE }
     }
 
-    record Var(Type type, int index) {}
+    record Var(JType type, int index) {}
 
 }
